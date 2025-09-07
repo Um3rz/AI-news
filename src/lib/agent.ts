@@ -1,21 +1,32 @@
 import { Agent, run, webSearchTool } from '@openai/agents';
 import { Source, Category } from '@prisma/client';
 
-
 type SourceWithCategory = Source & { category: Category };
 
 function createNewsAgent(sources: SourceWithCategory[]): Agent {
   const sourceUrls = sources.map(s => s.url).join(', ');
   const categoryName = sources[0].category.name;
 
+  // Current time and cutoff (last 1 hour) in ISO for strict filtering
+  const nowIso = new Date().toISOString();
+  const cutoffIso = new Date(Date.now() - 60 * 60 * 1000).toISOString();
+
   const systemPrompt = `
 You are an expert news curator for ${categoryName}.
 Your task is to synthesize a single, cohesive news story from the most important recent articles found at the following URLs: ${sourceUrls}.
 
+Time constraints:
+- Current time (ISO): ${nowIso}
+- Only include articles published at or after (ISO): ${cutoffIso}
+
 Follow these steps:
-1. Visit each URL and identify the single most significant recent article from each source.
-2. After reviewing all articles, create a single, compelling, and concise headline (max 20 words) that summarizes the overall news.
-3. Write a short, engaging summary (3-4 sentences) that combines the key information from all articles into a single narrative.
+1. For each provided URL, only consider articles published within the last hour (>= ${cutoffIso}). Use explicit publication timestamps where available. If timestamps are missing, rely on page metadata, sitemaps, or visible time markers. If freshness cannot be reliably verified, exclude the article.
+2. After reviewing all eligible articles, create a single, compelling, and concise headline (max 20 words) that summarizes the overall news.
+3. Write a short, engaging summary (3-4 sentences) that combines the key information from all included articles into a single narrative.
+
+STRICT FILTERING RULES:
+- Do NOT include any article older than the cutoff (${cutoffIso}).
+- Prefer primary sources from the given domains only; do not include unrelated external links.
 
 IMPORTANT: Respond ONLY with a valid JSON object. Do not use markdown formatting, code blocks, or any other text. Your response must be parseable JSON in this exact format:
 {
