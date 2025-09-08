@@ -3,6 +3,23 @@ import { Source, Category } from '@prisma/client';
 
 type SourceWithCategory = Source & { category: Category };
 
+// Parsed output expected from the agent
+export interface CuratedResult {
+  headline: string;
+  summary: string;
+  urls: string[];
+}
+
+function isCuratedResult(value: unknown): value is CuratedResult {
+  if (!value || typeof value !== 'object') return false;
+  const v = value as Record<string, unknown>;
+  return (
+    typeof v.headline === 'string' &&
+    typeof v.summary === 'string' &&
+    Array.isArray(v.urls) && v.urls.every((u) => typeof u === 'string')
+  );
+}
+
 function createNewsAgent(sources: SourceWithCategory[]): Agent {
   const sourceUrls = sources.map(s => s.url).join(', ');
   const categoryName = sources[0].category.name;
@@ -46,10 +63,10 @@ IMPORTANT: Respond ONLY with a valid JSON object. Do not use markdown formatting
   return agent;
 }
 
-function extractJsonFromText(text: string): any {
+function extractJsonFromText(text: string): unknown {
   try {
     return JSON.parse(text);
-  } catch (e) {
+  } catch {
     const codeBlockMatches = text.match(/```(?:json)?\s*(\{[\s\S]*?\})\s*```/);
     if (codeBlockMatches && codeBlockMatches[1]) {
       try {
@@ -81,7 +98,7 @@ function extractJsonFromText(text: string): any {
   }
 }
 
-export async function curateNews(sources: SourceWithCategory[]): Promise<{ headline: string; summary: string; urls: string[] } | null> {
+export async function curateNews(sources: SourceWithCategory[]): Promise<CuratedResult | null> {
   if (sources.length === 0) {
     return null;
   }
@@ -99,7 +116,7 @@ export async function curateNews(sources: SourceWithCategory[]): Promise<{ headl
     if (typeof finalOutput === 'string') {
       const parsedContent = extractJsonFromText(finalOutput);
       
-      if (parsedContent && parsedContent.headline && parsedContent.summary && parsedContent.urls) {
+      if (isCuratedResult(parsedContent)) {
         console.log(`Successfully curated story for ${categoryName}:`, {
           headline: parsedContent.headline,
           summary: parsedContent.summary,
@@ -109,7 +126,7 @@ export async function curateNews(sources: SourceWithCategory[]): Promise<{ headl
         return {
           headline: parsedContent.headline,
           summary: parsedContent.summary,
-          urls: Array.isArray(parsedContent.urls) ? parsedContent.urls : [],
+          urls: parsedContent.urls,
         };
       } else {
         console.error('Parsed content missing required fields:', parsedContent);
