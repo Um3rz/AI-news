@@ -1,0 +1,4 @@
+
+npx cdk deploy `
+  -c imageUri="311141557724.dkr.ecr.eu-north-1.amazonaws.com/next-prisma" `
+  --require-approval never

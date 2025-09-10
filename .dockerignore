@@ -1,0 +1,11 @@
+.git
+node_modules
+.next
+coverage
+dist
+Dockerfile*
+docker-compose*
+README.md
+.env
+.env.*
+.prisma
