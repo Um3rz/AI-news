@@ -11,21 +11,21 @@
     },
     "NewscuratorStack": {
       "type": "aws:cloudformation:stack",
-      "environment": "aws://311141557724/us-east-1",
+      "environment": "aws://311141557724/eu-north-1",
       "properties": {
         "templateFile": "NewscuratorStack.template.json",
         "terminationProtection": false,
         "validateOnSynth": false,
-        "assumeRoleArn": "arn:${AWS::Partition}:iam::311141557724:role/cdk-hnb659fds-deploy-role-311141557724-us-east-1",
-        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::311141557724:role/cdk-hnb659fds-cfn-exec-role-311141557724-us-east-1",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-311141557724-us-east-1/eb135426f68b93fcb806bc9de85a877956c765eeb5edde25b878b601d60b1ac5.json",
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::311141557724:role/cdk-hnb659fds-deploy-role-311141557724-eu-north-1",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::311141557724:role/cdk-hnb659fds-cfn-exec-role-311141557724-eu-north-1",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-311141557724-eu-north-1/97056ae98179f47f176b32ba835552718bb1f8524dd7ac2359578da50cf9662c.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
           "NewscuratorStack.assets"
         ],
         "lookupRole": {
-          "arn": "arn:${AWS::Partition}:iam::311141557724:role/cdk-hnb659fds-lookup-role-311141557724-us-east-1",
+          "arn": "arn:${AWS::Partition}:iam::311141557724:role/cdk-hnb659fds-lookup-role-311141557724-eu-north-1",
           "requiresBootstrapStackVersion": 8,
           "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
         }

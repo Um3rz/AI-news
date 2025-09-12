@@ -42,3 +42,4 @@ next-env.d.ts
 
 /generated/prisma
 /infra/node_modules
+/infra

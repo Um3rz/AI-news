@@ -1,4 +1,15 @@
+$Region = "eu-north-1"
 
-npx cdk deploy `
-  -c imageUri="311141557724.dkr.ecr.eu-north-1.amazonaws.com/next-prisma" `
-  --require-approval never
+$NEXTAUTH_SECRET = node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+aws secretsmanager create-secret --name app/newscurator/NEXTAUTH_SECRET --secret-string $NEXTAUTH_SECRET --region $Region 2>$null; if ($LASTEXITCODE -ne 0) { aws secretsmanager put-secret-value --secret-id app/newscurator/NEXTAUTH_SECRET --secret-string $NEXTAUTH_SECRET --region $Region }
+
+# OPENAI_API_KEY
+$OPENAI_API_KEY = "k-proj-6QiiuURoO58dYDBDjJ6aMuQAHgDHve_DW_j9dbiRZti_jBJFC0xPZx_oxEz_sxvNHnm7xNeF9TT3BlbkFJzXk0NKiUsnSWjdqCQmtoVQJa95nJfCtC8aGTCorPPD2FhsSm9f5ZoPWmvBH6Sqyc_habeadpsA"
+aws secretsmanager create-secret --name app/newscurator/OPENAI_API_KEY --secret-string $OPENAI_API_KEY --region $Region 2>$null; if ($LASTEXITCODE -ne 0) { aws secretsmanager put-secret-value --secret-id app/newscurator/OPENAI_API_KEY --secret-string $OPENAI_API_KEY --region $Region }
+
+$AccountId = (aws sts get-caller-identity --query Account --output text)
+
+$Env:AWS_REGION = "eu-north-1"
+$Env:AWS_DEFAULT_REGION = "eu-north-1"
+$Env:CDK_DEFAULT_ACCOUNT = $AccountId
+$Env:CDK_DEFAULT_REGION  = "eu-north-1"

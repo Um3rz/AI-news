@@ -21,7 +21,7 @@
   "VpcpublicSubnet1Subnet2BB74ED7": {
    "Type": "AWS::EC2::Subnet",
    "Properties": {
-    "AvailabilityZone": "us-east-1a",
+    "AvailabilityZone": "eu-north-1a",
     "CidrBlock": "10.0.0.0/18",
     "MapPublicIpOnLaunch": true,
     "Tags": [
@@ -140,7 +140,7 @@
   "VpcpublicSubnet2SubnetE34B022A": {
    "Type": "AWS::EC2::Subnet",
    "Properties": {
-    "AvailabilityZone": "us-east-1b",
+    "AvailabilityZone": "eu-north-1b",
     "CidrBlock": "10.0.64.0/18",
     "MapPublicIpOnLaunch": true,
     "Tags": [
@@ -217,7 +217,7 @@
   "VpcprivateegressSubnet1Subnet830BC88F": {
    "Type": "AWS::EC2::Subnet",
    "Properties": {
-    "AvailabilityZone": "us-east-1a",
+    "AvailabilityZone": "eu-north-1a",
     "CidrBlock": "10.0.128.0/18",
     "MapPublicIpOnLaunch": false,
     "Tags": [
@@ -291,7 +291,7 @@
   "VpcprivateegressSubnet2SubnetEB0EA9CB": {
    "Type": "AWS::EC2::Subnet",
    "Properties": {
-    "AvailabilityZone": "us-east-1b",
+    "AvailabilityZone": "eu-north-1b",
     "CidrBlock": "10.0.192.0/18",
     "MapPublicIpOnLaunch": false,
     "Tags": [
@@ -677,7 +677,7 @@
           {
            "Ref": "AWS::Partition"
           },
-          ":secretsmanager:us-east-1:311141557724:secret:app/newscurator/NEXTAUTH_SECRET-??????"
+          ":secretsmanager:eu-north-1:311141557724:secret:app/newscurator/NEXTAUTH_SECRET-??????"
          ]
         ]
        }
@@ -696,7 +696,7 @@
           {
            "Ref": "AWS::Partition"
           },
-          ":secretsmanager:us-east-1:311141557724:secret:app/newscurator/OPENAI_API_KEY-??????"
+          ":secretsmanager:eu-north-1:311141557724:secret:app/newscurator/OPENAI_API_KEY-??????"
          ]
         ]
        }
@@ -715,7 +715,7 @@
           {
            "Ref": "AWS::Partition"
           },
-          ":secretsmanager:us-east-1:311141557724:secret:app/newscurator/DATABASE_URL-??????"
+          ":secretsmanager:eu-north-1:311141557724:secret:app/newscurator/DATABASE_URL-??????"
          ]
         ]
        }
@@ -883,7 +883,7 @@
          "Ref": "AppLogGroup7D8CD952"
         },
         "awslogs-stream-prefix": "next",
-        "awslogs-region": "us-east-1"
+        "awslogs-region": "eu-north-1"
        }
       },
       "Name": "web",
@@ -904,7 +904,7 @@
            {
             "Ref": "AWS::Partition"
            },
-           ":secretsmanager:us-east-1:311141557724:secret:app/newscurator/NEXTAUTH_SECRET"
+           ":secretsmanager:eu-north-1:311141557724:secret:app/newscurator/NEXTAUTH_SECRET"
           ]
          ]
         }
@@ -919,7 +919,7 @@
            {
             "Ref": "AWS::Partition"
            },
-           ":secretsmanager:us-east-1:311141557724:secret:app/newscurator/OPENAI_API_KEY"
+           ":secretsmanager:eu-north-1:311141557724:secret:app/newscurator/OPENAI_API_KEY"
           ]
          ]
         }
@@ -934,7 +934,7 @@
            {
             "Ref": "AWS::Partition"
            },
-           ":secretsmanager:us-east-1:311141557724:secret:app/newscurator/DATABASE_URL"
+           ":secretsmanager:eu-north-1:311141557724:secret:app/newscurator/DATABASE_URL"
           ]
          ]
         }

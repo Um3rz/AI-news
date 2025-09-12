@@ -1,18 +1,18 @@
 {
   "version": "48.0.0",
   "files": {
-    "eb135426f68b93fcb806bc9de85a877956c765eeb5edde25b878b601d60b1ac5": {
+    "97056ae98179f47f176b32ba835552718bb1f8524dd7ac2359578da50cf9662c": {
       "displayName": "NewscuratorStack Template",
       "source": {
         "path": "NewscuratorStack.template.json",
         "packaging": "file"
       },
       "destinations": {
-        "311141557724-us-east-1-ae14b183": {
-          "bucketName": "cdk-hnb659fds-assets-311141557724-us-east-1",
-          "objectKey": "eb135426f68b93fcb806bc9de85a877956c765eeb5edde25b878b601d60b1ac5.json",
-          "region": "us-east-1",
-          "assumeRoleArn": "arn:${AWS::Partition}:iam::311141557724:role/cdk-hnb659fds-file-publishing-role-311141557724-us-east-1"
+        "311141557724-eu-north-1-9067c6e7": {
+          "bucketName": "cdk-hnb659fds-assets-311141557724-eu-north-1",
+          "objectKey": "97056ae98179f47f176b32ba835552718bb1f8524dd7ac2359578da50cf9662c.json",
+          "region": "eu-north-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::311141557724:role/cdk-hnb659fds-file-publishing-role-311141557724-eu-north-1"
         }
       }
     }
