@@ -1,5 +1,5 @@
+<img width="1100" height="1123" alt="image" src="https://github.com/user-attachments/assets/4fcdb4d4-9ce7-45d7-938a-64e75406d1dc" />
 <img width="949" height="430" alt="image" src="https://github.com/user-attachments/assets/e836f907-e520-40ea-9c12-f999949a4f5b" />
-
 TECH STACK
 Core Technologies:
 - Frontend and Backend Framework: Next.js 15.3.5 
